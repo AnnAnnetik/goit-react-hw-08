@@ -1,0 +1,7 @@
+p {
+  margin-left: 10px;
+}
+.contactInf {
+  display: flex;
+  align-items: center;
+}

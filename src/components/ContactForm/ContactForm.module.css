@@ -1,0 +1,25 @@
+.formContainer {
+  display: flex;
+  flex-direction: column;
+  max-width: 375px;
+  border: 1px solid black;
+  padding: 10px;
+  border-radius: 4px;
+}
+
+.inputContainer {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 10px;
+}
+
+button {
+  margin-top: 10px;
+  width: 120 px;
+}
+input {
+  padding: 10px;
+  border: 1px solid black;
+  border-radius: 4px;
+  margin-bottom: 5px;
+}
