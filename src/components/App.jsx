@@ -1,33 +1,39 @@
-import { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import fetchContacts from '../redux/contactsOps';
-import { selectError, selectIsLoading } from '../redux/contactsSlice';
-import ContactForm from './ContactForm/ContactForm';
-import SearchBox from './SearchBox/SearchBox';
+import { Routes, Route } from 'react-router-dom';
+import Navigation from './Navigation/Navigation';
+import { Suspense, lazy } from 'react';
 import Loader from './Loader/Loader';
-import ErrorMessage from './Error/Error';
-import ContactList from './ContactList/ContactList';
+import NotFoundPage from '../pages/NotFoundPage/NotFoundPage';
 
-const App = () => {
-  const dispatch = useDispatch();
-  const isloading = useSelector(selectIsLoading);
-  const isError = useSelector(selectError);
+const HomePage = lazy(() => import('../pages/HomePage/HomePage'));
+const ContactsPage = lazy(() => import('../pages/ContactsPage/ContactsPage'));
+const RegistrationPage = lazy(() =>
+  import('../pages/RegistrationPage/RegistrationPage')
+);
+const LoginPage = lazy(() => import('../pages/LoginPage/LoginPage'));
+// const MovieDetailsPage = lazy(() =>
+//   import('../pages/MovieDetailsPage/MovieDetailsPage')
+// );
 
-  useEffect(() => {
-    dispatch(fetchContacts());
-  }, [dispatch]);
-
+export const App = () => {
   return (
-    <>
-      <div>
-        <h1>Phonebook</h1>
-        <ContactForm />
-        <SearchBox />
-        {isloading && <Loader />}
-        {isError && <ErrorMessage />}
-        <ContactList />
-      </div>
-    </>
+    <div>
+      <header>
+        <Navigation />
+      </header>
+
+      <main>
+        <Suspense fallback={<Loader />}>
+          <Routes>
+            <Route path="/" element={<HomePage />} />
+            <Route path="/contacts" element={<ContactsPage />} />
+            <Route path="/register" element={<RegistrationPage />} />
+            <Route path="/login" element={<LoginPage />} />
+            <Route path="*" element={<NotFoundPage />} />
+          </Routes>
+        </Suspense>
+      </main>
+    </div>
   );
 };
+
 export default App;
