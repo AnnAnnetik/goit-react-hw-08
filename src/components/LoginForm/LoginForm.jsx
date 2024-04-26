@@ -1,15 +1,11 @@
 import { useId } from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
-import css from './RegistrationForm.module.css';
+import css from './LoginForm.module.css';
 import { useDispatch } from 'react-redux';
-import { register } from '../../redux/auth/operations';
+import { login } from '../../redux/auth/operations';
 
-const RegistrationSchema = Yup.object().shape({
-  name: Yup.string()
-    .min(2, 'Too Short!')
-    .max(50, 'Too Long!')
-    .required('Name is required'),
+const LoginSchema = Yup.object().shape({
   email: Yup.string()
     .email('Invalid email address')
     .required('Email is required'),
@@ -19,33 +15,28 @@ const RegistrationSchema = Yup.object().shape({
     .min(8, 'Password must be at least 8 characters long'),
 });
 
-const RegistrationForm = () => {
+const LoginForm = () => {
   const dispatch = useDispatch();
-  const nameFieldId = useId();
   const emailFieldId = useId();
   const passwordFieldId = useId();
 
   const handleSubmit = (values, actions) => {
-    dispatch(register(values));
-
+    dispatch(login(values));
     actions.resetForm();
   };
 
   return (
     <Formik
       initialValues={{
-        name: '',
         email: '',
         password: '',
       }}
       onSubmit={handleSubmit}
-      validationSchema={RegistrationSchema}
+      validationSchema={LoginSchema}
     >
       <Form className={css.form}>
-        <h2>Registration Form</h2>
-        <label htmlFor={nameFieldId}>Name</label>
-        <Field className={css.field} type="text" name="name" id={nameFieldId} />
-        <ErrorMessage className={css.err} name="name" component="span" />
+        <h2>Login Form</h2>
+
         <label htmlFor={emailFieldId}>Email</label>
         <Field
           className={css.field}
@@ -69,4 +60,4 @@ const RegistrationForm = () => {
     </Formik>
   );
 };
-export default RegistrationForm;
+export default LoginForm;

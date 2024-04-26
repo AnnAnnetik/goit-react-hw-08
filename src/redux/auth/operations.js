@@ -25,32 +25,23 @@ export const register = createAsyncThunk(
     try {
       const { data } = await instens.post('/users/signup', formData);
       console.log(data);
+      setToken(data.token);
       return data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
     }
   }
 );
-// export default fetchContacts;
-// export const addContact = createAsyncThunk(
-//   'contacts/addContact',
-//   async (contact, thunkAPI) => {
-//     try {
-//       const response = await axios.post('/contacts', { ...contact });
-//       return response.data;
-//     } catch (e) {
-//       return thunkAPI.rejectWithValue(e.message);
-//     }
-//   }
-// );
-// export const deleteContact = createAsyncThunk(
-//   'contacts/deleteContact',
-//   async (contactId, thunkAPI) => {
-//     try {
-//       const response = await axios.delete(`/contacts/${contactId}`);
-//       return response.data;
-//     } catch (e) {
-//       return thunkAPI.rejectWithValue(e.message);
-//     }
-//   }
-// );
+export const login = createAsyncThunk(
+  'auth/login',
+  async (formData, thunkAPI) => {
+    try {
+      const { data } = await instens.post('/users/login', formData);
+      console.log(data);
+      setToken(data.token);
+      return data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);

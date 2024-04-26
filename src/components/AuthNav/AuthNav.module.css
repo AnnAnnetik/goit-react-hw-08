@@ -1,0 +1,12 @@
+.navLink {
+  display: flex;
+  padding: 15px 20px;
+
+  background-color: transparent;
+  color: black;
+  text-decoration: none;
+  transition: all 0.3s;
+}
+.active {
+  color: red;
+}
