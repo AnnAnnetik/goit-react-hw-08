@@ -60,3 +60,13 @@ export const refreshUser = createAsyncThunk(
     }
   }
 );
+export const logOut = createAsyncThunk('auth/logout', async (_, thunkAPI) => {
+  try {
+    await instens.post('/users/logout');
+
+    clearToken();
+    return;
+  } catch (error) {
+    return thunkAPI.rejectWithValue(error.message);
+  }
+});
