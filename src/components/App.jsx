@@ -1,9 +1,11 @@
 import { Routes, Route } from 'react-router-dom';
 
-import { Suspense, lazy } from 'react';
+import { Suspense, lazy, useEffect } from 'react';
 import Loader from './Loader/Loader';
 import NotFoundPage from '../pages/NotFoundPage/NotFoundPage';
 import { Layout } from './Layout/Layout';
+import { useDispatch } from 'react-redux';
+import { refreshUser } from '../redux/auth/operations';
 
 const HomePage = lazy(() => import('../pages/HomePage/HomePage'));
 const ContactsPage = lazy(() => import('../pages/ContactsPage/ContactsPage'));
@@ -11,11 +13,13 @@ const RegistrationPage = lazy(() =>
   import('../pages/RegistrationPage/RegistrationPage')
 );
 const LoginPage = lazy(() => import('../pages/LoginPage/LoginPage'));
-// const MovieDetailsPage = lazy(() =>
-//   import('../pages/MovieDetailsPage/MovieDetailsPage')
-// );
 
 export const App = () => {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(refreshUser());
+  }, [dispatch]);
   return (
     <Layout>
       <Suspense fallback={<Loader />}>
@@ -32,3 +36,4 @@ export const App = () => {
 };
 
 export default App;
+// https://stackblitz.com/edit/vitejs-vite-ks9y3b?file=src%2Fcomponents%2FApp.jsx

@@ -1,17 +1,28 @@
 .nav {
   display: flex;
-  align-items: center;
-  gap: 20px;
+  justify-content: flex-end;
+  background-color: #ffebee;
+  padding: 10px;
+  border-radius: 15px;
 }
-.navLink {
-  display: flex;
-  padding: 15px 20px;
 
-  background-color: transparent;
-  color: black;
+.navLink {
+  background-color: #ff69b4;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 15px;
+  margin-left: 10px;
   text-decoration: none;
-  transition: all 0.3s;
+  font-family: 'Comic Sans MS', 'Arial', sans-serif;
+  box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s, transform 0.3s;
 }
+
+.navLink:hover {
+  background-color: #ff1493;
+  transform: translateY(-2px);
+}
+
 .active {
-  color: red;
+  background-color: #ff1493;
 }

@@ -9,7 +9,7 @@ const getNavLinkClassName = ({ isActive }) =>
 
 export const AuthNav = () => {
   return (
-    <div>
+    <div className={css.nav}>
       <NavLink className={getNavLinkClassName} to="/register">
         Register
       </NavLink>
