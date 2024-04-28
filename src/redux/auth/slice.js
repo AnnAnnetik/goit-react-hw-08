@@ -33,6 +33,7 @@ const authSlice = createSlice({
         state.isLoading = false;
         state.user = action.payload;
         state.isLoggedIn = true;
+        state.isRefreshing = false;
       })
 
       .addCase(logOut.fulfilled, state => {
@@ -41,13 +42,19 @@ const authSlice = createSlice({
         state.token = null;
         state.isLoggedIn = false;
       })
+      .addCase(refreshUser.pending, state => {
+        state.isRefreshing = true;
+      })
+      .addCase(refreshUser.rejected, state => {
+        state.isRefreshing = false;
+      })
 
       .addMatcher(
         isAnyOf(
-          register.rejected,
-          login.rejected,
-          refreshUser.rejected,
-          logOut.rejected
+          register.pending,
+          login.pending,
+          refreshUser.pending,
+          logOut.pending
         ),
         state => {
           state.isLoading = true;
