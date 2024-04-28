@@ -14,6 +14,7 @@ const ContactForm = () => {
 
   const handleSubmit = (values, actions) => {
     dispatch(addContact(values));
+
     actions.resetForm();
   };
 

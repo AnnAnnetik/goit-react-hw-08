@@ -1,12 +1,11 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-
-import { instens } from '../auth/operations';
+import { instance } from '../auth/operations';
 
 const fetchContacts = createAsyncThunk(
   'contacts/fetchAll',
   async (_, thunkAPI) => {
     try {
-      const { data } = await instens.get('/contacts');
+      const { data } = await instance.get('/contacts');
       console.log(data);
       return data;
     } catch (error) {
@@ -19,7 +18,8 @@ export const addContact = createAsyncThunk(
   'contacts/addContact',
   async (formData, thunkAPI) => {
     try {
-      const { data } = await instens.post('/contacts', formData);
+      const { data } = await instance.post('/contacts', formData);
+      console.log(data);
       return data;
     } catch (e) {
       return thunkAPI.rejectWithValue(e.message);
@@ -30,7 +30,7 @@ export const deleteContact = createAsyncThunk(
   'contacts/deleteContact',
   async (contactId, thunkAPI) => {
     try {
-      const { data } = await instens.delete(`/contacts/${contactId}`);
+      const { data } = await instance.delete(`/contacts/${contactId}`);
       return data;
     } catch (e) {
       return thunkAPI.rejectWithValue(e.message);

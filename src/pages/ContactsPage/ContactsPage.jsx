@@ -6,6 +6,8 @@ import { selectError, selectIsLoading } from '../../redux/contacts/selectors';
 import fetchContacts from '../../redux/contacts/operations';
 import ContactList from '../../components/ContactList/ContactList';
 import { useEffect } from 'react';
+import Loader from '../../components/Loader/Loader';
+import ErrorMessage from '../../components/Error/Error';
 
 const ContactsPage = () => {
   const dispatch = useDispatch();
@@ -23,11 +25,11 @@ const ContactsPage = () => {
         <div className={css.formContainer}>
           <ContactForm />
         </div>
+        {isLoading && <Loader />}
+        {error && <ErrorMessage />}
         <div className={css.searchContainer}>
           <SearchBox />
         </div>
-        {isLoading && !error && <b>Loading...</b>}
-        {error && <b>Something went wrong.</b>}
 
         <ContactList />
       </div>
