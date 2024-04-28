@@ -17,9 +17,9 @@ const fetchContacts = createAsyncThunk(
 export default fetchContacts;
 export const addContact = createAsyncThunk(
   'contacts/addContact',
-  async (contact, thunkAPI) => {
+  async (formData, thunkAPI) => {
     try {
-      const { data } = await instens.post('/contacts', { ...contact });
+      const { data } = await instens.post('/contacts', formData);
       return data;
     } catch (e) {
       return thunkAPI.rejectWithValue(e.message);

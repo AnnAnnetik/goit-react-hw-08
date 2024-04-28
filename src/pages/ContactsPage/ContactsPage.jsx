@@ -28,6 +28,7 @@ const ContactsPage = () => {
         </div>
         {isLoading && !error && <b>Loading...</b>}
         {error && <b>Something went wrong.</b>}
+
         <ContactList />
       </div>
     </div>
