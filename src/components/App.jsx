@@ -1,7 +1,7 @@
 import { Routes, Route } from 'react-router-dom';
 
 import { lazy, useEffect } from 'react';
-// import Loader from './Loader/Loader';
+
 import NotFoundPage from '../pages/NotFoundPage/NotFoundPage';
 import { Layout } from './Layout/Layout';
 import { useDispatch, useSelector } from 'react-redux';
@@ -33,25 +33,22 @@ export const App = () => {
         <Route
           path="/contacts"
           element={
-            <PrivateRoute>
-              <ContactsPage />
-            </PrivateRoute>
+            <PrivateRoute redirectTo="/login" component={<ContactsPage />} />
           }
         />
         <Route
           path="/register"
           element={
-            <RestrictedRoute>
-              <RegistrationPage />
-            </RestrictedRoute>
+            <RestrictedRoute
+              redirectTo="/contacts"
+              component={<RegistrationPage />}
+            />
           }
         />
         <Route
           path="/login"
           element={
-            <RestrictedRoute>
-              <LoginPage />
-            </RestrictedRoute>
+            <RestrictedRoute redirectTo="/contacts" component={<LoginPage />} />
           }
         />
         <Route path="*" element={<NotFoundPage />} />
@@ -60,4 +57,3 @@ export const App = () => {
   );
 };
 export default App;
-// https://stackblitz.com/edit/vitejs-vite-ks9y3b?file=src%2Fcomponents%2FApp.jsx

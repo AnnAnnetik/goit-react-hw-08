@@ -6,7 +6,7 @@ const fetchContacts = createAsyncThunk(
   async (_, thunkAPI) => {
     try {
       const { data } = await instance.get('/contacts');
-      console.log(data);
+
       return data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
@@ -19,7 +19,7 @@ export const addContact = createAsyncThunk(
   async (formData, thunkAPI) => {
     try {
       const { data } = await instance.post('/contacts', formData);
-      console.log(data);
+
       return data;
     } catch (e) {
       return thunkAPI.rejectWithValue(e.message);
